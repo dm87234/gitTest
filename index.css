@@ -7,3 +7,9 @@ ul,
 ol {
     list-style: none;
 }
+
+p {
+    color: pink;
+    width: 200px;
+    margin-left: 30px;
+}
