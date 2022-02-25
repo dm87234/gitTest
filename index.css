@@ -7,3 +7,8 @@ ul,
 ol {
     list-style: none;
 }
+
+p {
+    color: palegreen;
+    padding-left: 40px;
+}
