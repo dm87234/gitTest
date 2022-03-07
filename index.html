@@ -15,7 +15,8 @@
 </head>
 
 <body>
-
+    <button onclick="checkLoginState()">登入</button>
+    <button onclick="logout()">登出</button>
     <script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -39,24 +40,43 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+
+        function login() {
+            FB.login(function(response) {
+                console.log(response);
+                if (response.status === "connected") {
+                    FB.api('/me', {
+                        'fields': 'id,name,email,picture'
+                    }, function(response) {
+                        console.log(response);
+                    });
+                }
+            }, {
+                scope: 'email',
+                auth_type: 'rerequest'
+            });
+        }
+
+        function logout() {
+            FB.logout(function(response) {
+                /*console.log(response)*/
+            });
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    console.log('你已經登入囉')
+                } else {
+                    login()
+                }
+            });
+        }
+        checkLoginState();
     </script>
-    <header>
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-        </ul>
-    </header>
-    <main>
-        <div>
-            <h1>喔喔喔</h1>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat veritatis possimus nam excepturi sit officia accusantium pariatur quo soluta iure tenetur, exercitationem illo sunt, nisi rerum eius quasi cumque eligendi!</p>
-        </div>
-    </main>
-    <h1>hello</h1>
-    <footer>
-        <p>kkkkkkkk</p>
-    </footer>
+
+
 </body>
 
 </html>
